@@ -1,0 +1,107 @@
+{
+  "name": "Event",
+  "type": "object",
+  "properties": {
+    "nama": {
+      "type": "string",
+      "description": "Nama acara"
+    },
+    "tanggal": {
+      "type": "string",
+      "format": "date",
+      "description": "Tanggal acara"
+    },
+    "jenis_paket": {
+      "type": "string",
+      "description": "Jenis paket bantuan"
+    },
+    "stok_awal": {
+      "type": "number",
+      "default": 0
+    },
+    "terpakai": {
+      "type": "number",
+      "default": 0,
+      "description": "Jatah stok yang sudah dipesan penyerahan (penjaga agar stok tidak negatif)"
+    },
+    "jumlah_meja": {
+      "type": "number",
+      "default": 1
+    },
+    "menit_per_orang": {
+      "type": "number",
+      "default": 2
+    },
+    "faktor_utilisasi": {
+      "type": "number",
+      "default": 0.8
+    },
+    "cadangkan_jatah": {
+      "type": "boolean",
+      "default": false
+    },
+    "mode_offline": {
+      "type": "boolean",
+      "default": true
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "draf",
+        "siap",
+        "berjalan",
+        "ditutup"
+      ],
+      "enumColors": [
+        "gray",
+        "blue",
+        "yellow",
+        "green"
+      ],
+      "default": "draf"
+    },
+    "mode_retensi": {
+      "type": "string",
+      "enum": [
+        "anonim",
+        "arsip_lpj"
+      ],
+      "enumColors": [
+        "gray",
+        "blue"
+      ],
+      "default": "anonim"
+    },
+    "tanggal_akhir_retensi": {
+      "type": "string"
+    },
+    "ditutup_pada": {
+      "type": "string"
+    },
+    "laporan_token_hash": {
+      "type": "string"
+    },
+    "pemilik": {
+      "type": "string",
+      "description": "ID admin pemilik acara"
+    }
+  },
+  "required": [
+    "nama",
+    "tanggal"
+  ],
+  "rls": {
+    "read": {
+      "data.pemilik": "{{user.id}}"
+    },
+    "create": {
+      "data.pemilik": "{{user.id}}"
+    },
+    "update": {
+      "data.pemilik": "{{user.id}}"
+    },
+    "delete": {
+      "data.pemilik": "{{user.id}}"
+    }
+  }
+}

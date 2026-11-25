@@ -1,0 +1,64 @@
+{
+  "name": "Incident",
+  "type": "object",
+  "properties": {
+    "event_id": {
+      "type": "string"
+    },
+    "ticket_id": {
+      "type": "string"
+    },
+    "jenis": {
+      "type": "string",
+      "enum": [
+        "kupon_ganda",
+        "fotokopi",
+        "konflik",
+        "lainnya"
+      ],
+      "enumColors": [
+        "yellow",
+        "red",
+        "red",
+        "gray"
+      ],
+      "default": "lainnya"
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "terbuka",
+        "selesai"
+      ],
+      "enumColors": [
+        "yellow",
+        "green"
+      ],
+      "default": "terbuka"
+    },
+    "catatan_admin": {
+      "type": "string"
+    },
+    "pemilik": {
+      "type": "string"
+    }
+  },
+  "required": [
+    "event_id",
+    "jenis"
+  ],
+  "rls": {
+    "read": {
+      "data.pemilik": "{{user.id}}"
+    },
+    "create": {
+      "data.pemilik": "{{user.id}}"
+    },
+    "update": {
+      "data.pemilik": "{{user.id}}"
+    },
+    "delete": {
+      "data.pemilik": "{{user.id}}"
+    }
+  }
+}

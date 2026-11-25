@@ -1,0 +1,65 @@
+{
+  "name": "AuditLog",
+  "type": "object",
+  "properties": {
+    "event_id": {
+      "type": "string"
+    },
+    "aktor": {
+      "type": "string"
+    },
+    "aksi": {
+      "type": "string"
+    },
+    "waktu": {
+      "type": "string"
+    },
+    "service_table_id": {
+      "type": "string"
+    },
+    "hasil": {
+      "type": "string",
+      "enum": [
+        "berhasil",
+        "ditolak",
+        "percobaan_ganda"
+      ],
+      "enumColors": [
+        "green",
+        "red",
+        "yellow"
+      ]
+    },
+    "detail": {
+      "type": "string"
+    },
+    "pemilik": {
+      "type": "string"
+    }
+  },
+  "required": [
+    "event_id",
+    "aksi",
+    "hasil"
+  ],
+  "rls": {
+    "read": {
+      "data.pemilik": "{{user.id}}"
+    },
+    "create": {
+      "user_condition": {
+        "role": "admin"
+      }
+    },
+    "update": {
+      "user_condition": {
+        "role": "admin"
+      }
+    },
+    "delete": {
+      "user_condition": {
+        "role": "admin"
+      }
+    }
+  }
+}

@@ -1,0 +1,68 @@
+{
+  "name": "Ticket",
+  "type": "object",
+  "properties": {
+    "event_id": {
+      "type": "string"
+    },
+    "recipient_id": {
+      "type": "string"
+    },
+    "token_hash": {
+      "type": "string",
+      "description": "SHA-256 dari token asli. Token asli tidak pernah disimpan."
+    },
+    "kode_6": {
+      "type": "string"
+    },
+    "nomor_sobekan": {
+      "type": "number"
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "aktif",
+        "dipakai",
+        "dicabut"
+      ],
+      "enumColors": [
+        "green",
+        "blue",
+        "gray"
+      ],
+      "default": "aktif"
+    },
+    "versi_terbit": {
+      "type": "number",
+      "default": 1
+    },
+    "klaim_penanda": {
+      "type": "string",
+      "description": "client_event_id klaim terakhir yang menang"
+    },
+    "waktu_klaim": {
+      "type": "string"
+    },
+    "pemilik": {
+      "type": "string"
+    }
+  },
+  "required": [
+    "event_id",
+    "recipient_id"
+  ],
+  "rls": {
+    "read": {
+      "data.pemilik": "{{user.id}}"
+    },
+    "create": {
+      "data.pemilik": "{{user.id}}"
+    },
+    "update": {
+      "data.pemilik": "{{user.id}}"
+    },
+    "delete": {
+      "data.pemilik": "{{user.id}}"
+    }
+  }
+}

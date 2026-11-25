@@ -1,0 +1,52 @@
+{
+  "name": "ServiceTable",
+  "type": "object",
+  "properties": {
+    "event_id": {
+      "type": "string"
+    },
+    "nama": {
+      "type": "string"
+    },
+    "urutan": {
+      "type": "number",
+      "default": 1
+    },
+    "link_token_hash": {
+      "type": "string"
+    },
+    "status_tautan": {
+      "type": "string",
+      "enum": [
+        "aktif",
+        "dicabut"
+      ],
+      "enumColors": [
+        "green",
+        "gray"
+      ],
+      "default": "dicabut"
+    },
+    "pemilik": {
+      "type": "string"
+    }
+  },
+  "required": [
+    "event_id",
+    "nama"
+  ],
+  "rls": {
+    "read": {
+      "data.pemilik": "{{user.id}}"
+    },
+    "create": {
+      "data.pemilik": "{{user.id}}"
+    },
+    "update": {
+      "data.pemilik": "{{user.id}}"
+    },
+    "delete": {
+      "data.pemilik": "{{user.id}}"
+    }
+  }
+}

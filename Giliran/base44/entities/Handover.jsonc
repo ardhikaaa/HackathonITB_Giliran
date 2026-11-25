@@ -1,0 +1,69 @@
+{
+  "name": "Handover",
+  "type": "object",
+  "properties": {
+    "event_id": {
+      "type": "string"
+    },
+    "ticket_id": {
+      "type": "string"
+    },
+    "service_table_id": {
+      "type": "string"
+    },
+    "waktu": {
+      "type": "string"
+    },
+    "nama_pengambil": {
+      "type": "string",
+      "description": "Diisi jika bantuan diambil perwakilan"
+    },
+    "di_luar_gelombang": {
+      "type": "boolean",
+      "default": false
+    },
+    "client_event_id": {
+      "type": "string"
+    },
+    "sumber": {
+      "type": "string",
+      "enum": [
+        "online",
+        "offline"
+      ],
+      "enumColors": [
+        "green",
+        "yellow"
+      ]
+    },
+    "pemilik": {
+      "type": "string"
+    }
+  },
+  "required": [
+    "event_id",
+    "ticket_id",
+    "service_table_id",
+    "client_event_id"
+  ],
+  "rls": {
+    "read": {
+      "data.pemilik": "{{user.id}}"
+    },
+    "create": {
+      "user_condition": {
+        "role": "admin"
+      }
+    },
+    "update": {
+      "user_condition": {
+        "role": "admin"
+      }
+    },
+    "delete": {
+      "user_condition": {
+        "role": "admin"
+      }
+    }
+  }
+}

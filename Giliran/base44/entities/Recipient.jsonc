@@ -1,0 +1,43 @@
+{
+  "name": "Recipient",
+  "type": "object",
+  "properties": {
+    "event_id": {
+      "type": "string"
+    },
+    "group_id": {
+      "type": "string"
+    },
+    "nama": {
+      "type": "string"
+    },
+    "jumlah_anggota": {
+      "type": "number",
+      "default": 1
+    },
+    "hp": {
+      "type": "string"
+    },
+    "pemilik": {
+      "type": "string"
+    }
+  },
+  "required": [
+    "event_id",
+    "nama"
+  ],
+  "rls": {
+    "read": {
+      "data.pemilik": "{{user.id}}"
+    },
+    "create": {
+      "data.pemilik": "{{user.id}}"
+    },
+    "update": {
+      "data.pemilik": "{{user.id}}"
+    },
+    "delete": {
+      "data.pemilik": "{{user.id}}"
+    }
+  }
+}

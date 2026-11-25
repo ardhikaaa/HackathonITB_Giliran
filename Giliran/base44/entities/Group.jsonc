@@ -1,0 +1,52 @@
+{
+  "name": "Group",
+  "type": "object",
+  "properties": {
+    "event_id": {
+      "type": "string"
+    },
+    "nama": {
+      "type": "string"
+    },
+    "jumlah_keluarga": {
+      "type": "number",
+      "default": 0
+    },
+    "gelombang": {
+      "type": "number",
+      "default": 1
+    },
+    "gelombang_mulai": {
+      "type": "string",
+      "description": "Jam mulai jendela gelombang, contoh 09:00"
+    },
+    "gelombang_selesai": {
+      "type": "string",
+      "description": "Jam selesai jendela gelombang, contoh 11:30"
+    },
+    "service_table_id": {
+      "type": "string"
+    },
+    "pemilik": {
+      "type": "string"
+    }
+  },
+  "required": [
+    "event_id",
+    "nama"
+  ],
+  "rls": {
+    "read": {
+      "data.pemilik": "{{user.id}}"
+    },
+    "create": {
+      "data.pemilik": "{{user.id}}"
+    },
+    "update": {
+      "data.pemilik": "{{user.id}}"
+    },
+    "delete": {
+      "data.pemilik": "{{user.id}}"
+    }
+  }
+}

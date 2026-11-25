@@ -1,0 +1,54 @@
+{
+  "name": "StockMovement",
+  "type": "object",
+  "properties": {
+    "event_id": {
+      "type": "string"
+    },
+    "handover_id": {
+      "type": "string"
+    },
+    "jumlah": {
+      "type": "number"
+    },
+    "jenis": {
+      "type": "string",
+      "enum": [
+        "keluar",
+        "penyesuaian"
+      ],
+      "enumColors": [
+        "red",
+        "blue"
+      ],
+      "default": "keluar"
+    },
+    "pemilik": {
+      "type": "string"
+    }
+  },
+  "required": [
+    "event_id",
+    "jenis"
+  ],
+  "rls": {
+    "read": {
+      "data.pemilik": "{{user.id}}"
+    },
+    "create": {
+      "user_condition": {
+        "role": "admin"
+      }
+    },
+    "update": {
+      "user_condition": {
+        "role": "admin"
+      }
+    },
+    "delete": {
+      "user_condition": {
+        "role": "admin"
+      }
+    }
+  }
+}
