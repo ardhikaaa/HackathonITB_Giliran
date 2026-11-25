@@ -91,7 +91,7 @@ export async function listAll(entity, query = {}, { sort = "-created_date", limi
 }
 
 export async function requireEventOwner(base44, eventId, user) {
-  const svc = db.asServiceRole;
+  const svc = base44.asServiceRole;
   let event = null;
   try {
     event = await svc.entities.Event.get(eventId);

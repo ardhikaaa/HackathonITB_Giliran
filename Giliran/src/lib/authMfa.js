@@ -1,6 +1,4 @@
-const db = globalThis.__B44_DB__ || { auth:{ isAuthenticated: async()=>false, me: async()=>null }, entities:new Proxy({}, { get:()=>({ filter:async()=>[], get:async()=>null, create:async()=>({}), update:async()=>({}), delete:async()=>({}) }) }), integrations:{ Core:{ UploadFile:async()=>({ file_url:'' }) } } };
-
-
+import { db } from "@/api/base44Client";
 import { getAppParams } from "@/lib/app-params";
 
 const appId = () => getAppParams().appId;
@@ -23,9 +21,7 @@ async function post(suffix, body, token) {
 }
 
 export async function loginWithMfa(email, password) {
-  const result = await post("login", { email, password });
-  if (result.access_token) db.auth.setToken(result.access_token);
-  return result;
+  return db.auth.loginViaEmailPassword(email, password);
 }
 
 export async function continueMfa(result, returnTo) {

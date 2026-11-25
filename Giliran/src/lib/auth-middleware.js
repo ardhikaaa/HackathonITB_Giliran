@@ -1,16 +1,15 @@
 
-import { createClientFromRequest, getAccessToken } from "@base44/sdk";
+import { getAccessToken } from "@/api/base44Client";
 import { createMiddleware } from "@tanstack/react-start";
 import { getRequest, setResponseStatus } from "@tanstack/react-start/server";
 
 // Both middlewares hand handlers the same lazy `context.getBase44()`: a
 // function, not the client, because the client needs the platform headers and
-// a handler that never touches Base44 must still answer without them. The
-// platform sets those headers on every request that reaches the server; a
-// visitor's Authorization header makes the client act as that visitor.
-const withGetBase44 = (next, request = getRequest()) => {
+// a handler that never touches Base44 must still answer without them.
+const withGetBase44 = async (next, request = getRequest()) => {
+  const { createLocalBase44 } = await import("@/lib/local-db.server");
   let client;
-  return next({ context: { getBase44: () => (client ??= createClientFromRequest(request)) } });
+  return next({ context: { getBase44: () => (client ??= createLocalBase44(request)) } });
 };
 
 // Applied to every server function by src/start.js: sends the visitor's Base44
